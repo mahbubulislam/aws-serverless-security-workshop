@@ -5,7 +5,8 @@ const PARTNER_COMPANY_TABLE = "Companies";
 
 
 // Load the AWS SDK
-const AWS = require('aws-sdk');
+const AWSXRay = require('aws-xray-sdk-core');
+const AWS = AWSXRay.captureAWS(require('aws-sdk'));
 const secretName = process.env.SECRET_NAME;
 var secret;
 

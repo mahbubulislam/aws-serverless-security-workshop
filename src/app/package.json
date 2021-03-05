@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "aws-xray-sdk-core": "^3.2.0",
     "mysql": "^2.16.0"
   },
   "name": "customize-unicorn",

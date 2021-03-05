@@ -4,6 +4,7 @@ Description: Third party API functionality for Wild Rydes
 Globals:
   Function:
     Timeout: 30
+    Tracing: Active
     Environment:
       Variables:
         SECRET_NAME: secure-serverless-db-secret
@@ -41,7 +42,7 @@ Resources:
   CustomAuthorizerFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://mod-6b2678b745294e33-deploymentss3bucket-mp51ujijpc2a/securityworkshop/a65cbcb7ada18264ec8129716e2cf3cc
+      CodeUri: s3://mod-6b2678b745294e33-deploymentss3bucket-mp51ujijpc2a/securityworkshop/f71532ebd5c667c22eb7d69d0c8fe6d8
       Runtime: nodejs10.x
       Handler: index.handler
       Policies:
@@ -72,7 +73,7 @@ Resources:
   ManagePartnerFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://mod-6b2678b745294e33-deploymentss3bucket-mp51ujijpc2a/securityworkshop/d7ef3ebc96b2a46e1f785896d2dfd7c3
+      CodeUri: s3://mod-6b2678b745294e33-deploymentss3bucket-mp51ujijpc2a/securityworkshop/c8e8cf3f3e0447c33a9395c64ce4ea8c
       Handler: managePartners.lambda_handler
       Runtime: nodejs10.x
       Policies:
@@ -121,7 +122,7 @@ Resources:
   CustomizeUnicornFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://mod-6b2678b745294e33-deploymentss3bucket-mp51ujijpc2a/securityworkshop/d7ef3ebc96b2a46e1f785896d2dfd7c3
+      CodeUri: s3://mod-6b2678b745294e33-deploymentss3bucket-mp51ujijpc2a/securityworkshop/c8e8cf3f3e0447c33a9395c64ce4ea8c
       Handler: customizeUnicorn.lambda_handler
       Runtime: nodejs10.x
       Policies:
@@ -173,7 +174,7 @@ Resources:
   UnicornPartsFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://mod-6b2678b745294e33-deploymentss3bucket-mp51ujijpc2a/securityworkshop/d7ef3ebc96b2a46e1f785896d2dfd7c3
+      CodeUri: s3://mod-6b2678b745294e33-deploymentss3bucket-mp51ujijpc2a/securityworkshop/c8e8cf3f3e0447c33a9395c64ce4ea8c
       Handler: unicornParts.lambda_handler
       Runtime: nodejs10.x
       Policies:
