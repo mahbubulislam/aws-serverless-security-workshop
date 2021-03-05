@@ -1,0 +1,13 @@
+{
+    "UnicornPartsFunction": {
+        "apigateway": {
+            "path": "/socks",
+            "method": {
+                "value": "GET",
+                "items": [
+                    "GET"
+                ]
+            }
+        }
+    }
+}

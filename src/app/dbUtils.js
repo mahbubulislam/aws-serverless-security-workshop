@@ -3,11 +3,20 @@ var mysql = require('mysql');
 const CUSTOM_UNICORN_TABLE = "Custom_Unicorns";
 const PARTNER_COMPANY_TABLE = "Companies";
 
+
+// Load the AWS SDK
+const AWS = require('aws-sdk');
+const secretName = process.env.SECRET_NAME;
+var secret;
+
+// Create a Secrets Manager client
+const client = new AWS.SecretsManager();
+
 /*
 * Host
 */
 
-const host = "secure-aurora-cluster.cluster-xxxxxxx.xxxxxxx.rds.amazonaws.com"
+const host = "mod-6b2678b745294e33-auroradbcluster-1aa9wv936j7se.cluster-czrxdyk8nrrf.us-east-1.rds.amazonaws.com"
 
 class Database {
 
@@ -48,12 +57,33 @@ class Database {
     getDbConfig() {
         console.log("getDbConfig()");
         return new Promise((resolve, reject) => {
-            resolve({
-                host: host,
-                user: "admin",
-                password: "Corp123!",
-                database: "unicorn_customization",
-                multipleStatements: true
+            client.getSecretValue({SecretId: secretName}, function (err, data) {
+                if (err) {
+                    console.error(err);
+                    if (err.code === 'ResourceNotFoundException')
+                        reject("The requested secret " + secretName + " was not found");
+                    else if (err.code === 'InvalidRequestException')
+                        reject("The request was invalid due to: " + err.message);
+                    else if (err.code === 'InvalidParameterException')
+                        reject("The request had invalid params: " + err.message);
+                    else
+                        reject(err.message);
+                }
+                else {
+                    if (data.SecretString !== "") {
+                        secret = data.SecretString;
+                        resolve({
+                            ssl: "Amazon RDS",
+                            host: JSON.parse(secret).host,
+                            user: JSON.parse(secret).username,
+                            password: JSON.parse(secret).password,
+                            database: "unicorn_customization",
+	                    multipleStatements: true
+                        });
+                    } else {
+                        reject("Cannot parse DB credentials from secrets manager.");
+                    }
+                }
             });
         });
     };

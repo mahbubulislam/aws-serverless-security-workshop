@@ -172,7 +172,7 @@ function ValidateToken(pems, event, context, callback) {
                         };
 
                         // Uncomment here to pass on the client ID as the api key in the auth response
-                        // authResponse.usageIdentifierKey = payload["client_id"];
+                        authResponse.usageIdentifierKey = payload["client_id"];
 
                         console.log("authResponse:" + JSON.stringify(authResponse, null, 2));
                         callback(null, authResponse);
